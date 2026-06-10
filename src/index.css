@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Logo script font */
+.logo {
+	font-family: 'Great Vibes', cursive;
+	font-weight: 400 !important;
+	letter-spacing: 0.5px;
+}
+
+/* Responsive base font scaling */
+@layer base {
+	html { font-size: 16px; }
+	@media (max-width: 768px) {
+		html { font-size: 14px; }
+	}
+	@media (min-width: 1280px) {
+		html { font-size: 18px; }
+	}
+}
+
+/* Utility for responsive images */
+.responsive-img {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	display: block;
+}
