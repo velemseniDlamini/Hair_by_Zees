@@ -1,9 +1,12 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (publish to main/docs)
 
 on:
   push:
     branches:
       - main
+    # avoid retriggering when only docs are changed by the workflow
+    paths-ignore:
+      - 'docs/**'
 
 jobs:
   build-and-deploy:
@@ -11,6 +14,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Use Node.js
         uses: actions/setup-node@v5
         with:
@@ -19,8 +24,19 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+      - name: Publish to main/docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # copy build output to docs/ so GitHub Pages can serve from main/docs
+          rm -rf docs || true
+          mkdir -p docs
+          cp -a dist/. docs/
+          # disable Jekyll processing
+          touch docs/.nojekyll
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git commit -m "chore: update docs for GitHub Pages [skip ci]" || echo "No changes to commit"
+          git push origin main
