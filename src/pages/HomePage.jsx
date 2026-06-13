@@ -24,8 +24,9 @@ const HomePage = ({ onAddToCart, setActiveLink }) => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-24 lg:py-32">
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'} max-w-3xl`}> 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
-              Your Natural Beauty, Enhanced
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-white leading-tight">
+              <span className="block typewriter typewriter-line1">Your Natural Beauty,</span>
+              <span className="block typewriter typewriter-line2">Enhanced</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-white/85 mb-8 leading-relaxed">
               Discover our curated collection of premium natural wigs. Handcrafted for elegance, designed for confidence.
