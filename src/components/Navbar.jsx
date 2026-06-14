@@ -3,7 +3,7 @@ import { ShoppingCart, Menu, X } from "lucide-react";
 
 const Navbar = ({ activeLink, setActiveLink, cartCount, setShowCart }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navLinks = ['Home', 'Shop', 'Gallery', 'Checkout'];
+  const navLinks = ['Home', 'Shop', 'Gallery', 'Place Order'];
 
    return (
     <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
